@@ -1,0 +1,9 @@
+{
+"name": "deepin-server-15.1",
+"arch": "mips64el",
+"task": 30,
+"preseed": "preseed.cfg",
+"include": "include.list",
+"exclude": "exclude.list",
+"output": "/work/mkiso"
+}
