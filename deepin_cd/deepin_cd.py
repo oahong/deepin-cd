@@ -3,6 +3,7 @@
 import os
 import re
 import logging
+import shutil
 
 from datetime import date
 try:
@@ -94,6 +95,8 @@ class DebianCD(object):
         """
         write package list to a task file, this file is predefined in debian-cd
         """
+        if os.path.isfile(packageList):
+            shutil.copy(packageList, taskFile)
         with open(taskFile, 'w') as f:
             f.write('\n'.join(packageList))
 
