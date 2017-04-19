@@ -50,3 +50,10 @@ def updateBootMenu(bootFolder, id, preseed):
     for idx, cfg in enumerate(bootcfg):
         with open(cfg, 'w') as cfg:
             cfg.write(fileContents[idx].format(vmlinux[0], 'initrd.gz', id, preseed))
+
+def set_value(x, y, allow_empty = True):
+    result = x or y
+    if result or allow_empty:
+        return result
+    else:
+        raise ValueError("both values are invalid")

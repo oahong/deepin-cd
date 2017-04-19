@@ -8,13 +8,7 @@ import pprint
 
 from deepin_cd.deepin_cd import DeepinCD
 from deepin_cd.config import __VERSION__, __ARCHS__
-
-def set_value(x, y, allow_empty = True):
-    result = x or y
-    if result or allow_empty:
-        return result
-    else:
-        raise ValueError("both values are invalid")
+from deepin_cd.utils import set_value
 
 if __name__ == '__main__':
     #TODO: preseed not implemented
