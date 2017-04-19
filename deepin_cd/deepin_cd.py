@@ -91,22 +91,23 @@ class DebianCD(object):
         print(cp.stdout.decode())
 
     @staticmethod
-    def append_package_list(packageList, taskFile):
+    def append_package_list(package_list, taskfile):
         """
-        write package list to a task file, this file is predefined in debian-cd
+        write package list or copy package list file to a task file,
+        this file is predefined in debian-cd
         """
-        if os.path.isfile(packageList):
-            shutil.copy(packageList, taskFile)
-        with open(taskFile, 'w') as f:
-            f.write('\n'.join(packageList))
+        if os.path.isfile(package_list):
+            shutil.copy(package_list, taskfile)
+        with open(taskfile, 'w') as f:
+            f.write('\n'.join(package_list))
 
     @staticmethod
     def add_late_command(script):
         raise NotImplementedError
 
     @staticmethod
-    def add_boot_files(bootPath, preseed):
-        if os.path.exists(bootPath):
+    def add_boot_files(bootdir):
+        if os.path.exists(bootdir):
             # TODO: fix debian-cd, copy boot files from a path
             # set by environment variable
             pass

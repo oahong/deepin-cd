@@ -81,7 +81,7 @@ if __name__ == '__main__':
     cd = DeepinCD(arch, version, build_id, workDir)
     cd.initialize_workdir()
 
-    #cd.add_boot_files('/work/loongson-boot', options.preseed)
+    #cd.add_boot_files('/work/loongson-boot')
     cd.append_package_list(include,
                            os.path.join(taskDir, 'deepin-extra'))
     cd.append_package_list(exclude,
