@@ -69,7 +69,7 @@ if __name__ == '__main__':
         }
 
     arch = set_value(configs['arch'], options.arch, allow_empty=False)
-    id = set_value(configs['task'], options.build_id, allow_empty=False)
+    build_id = set_value(configs['task'], options.build_id, allow_empty=False)
     name_version = set_value(configs['name'], 'deepin-15.1')
     name = ''.join(name_version.split('-')[:2])
     version = name_version.split('-')[-1]
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     include = set_value(configs['include'], options.include)
     preseed = set_value(configs['preseed'], options.preseed)
 
-    cd = DeepinCD(arch, version, id, workDir)
+    cd = DeepinCD(arch, version, build_id, workDir)
     cd.initialize_workdir()
 
     #cd.add_boot_files('/work/loongson-boot', options.preseed)
