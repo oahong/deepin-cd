@@ -40,11 +40,11 @@ if __name__ == '__main__':
 
     """
     make a deepin cd in 5 steps:
-    1. Add arch (mips64el in this case) specific boot files (hard-coded in debian-cd currently)
+    1. Add arch (mips64el/sw64) specific boot files (hard-coded in debian-cd at the time of writing)
     2. Append a list of packages to deepin-extra task file
     3. Append a list of packages to exclude, which will be exclude from debian-cd explicitly
     4. execute easy-build.sh, options can be specified by using environment variables
-    5. Print the final ISO image
+    5. Print the final build artifacts
     """
     workDir = options.workdir
     taskDir = os.path.join(options.workdir, 'tasks', DeepinCD.codename)
