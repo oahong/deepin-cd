@@ -11,7 +11,7 @@ from deepin_cd.config import __VERSION__, __ARCHS__
 if __name__ == '__main__':
     #TODO: preseed not implemented
     parser = argparse.ArgumentParser(
-        description='Build a custom installation media for deepin server.')
+        description='A custom installation media generator for deepin server.')
     parser.add_argument('--preseed', '-s',
                         help='Include the preseed in installation media')
     parser.add_argument('--arch', '-a', default='mips64el',
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     
     """
     make a deepin cd in following steps:
-    1. Add arch (mips64el in this case) specific boot files
+    1. Add arch (mips64el in this case) specific boot files (hard-coded in debian-cd currently)
     2. Append a list of packages to deepin-extra task file
     3. Append a list of packages to exclude, which will be exclude from debian-cd explicitly
     4. execute easy-build.sh, options can be specified by using environment variables
@@ -46,12 +46,11 @@ if __name__ == '__main__':
     cd = DeepinCD(options.arch, '15.2', 23, workDir)
     cd.initialize_workdir()
 
+    #cd.add_boot_files('/work/loongson-boot', options.preseed)
     cd.append_package_list(options.include_package,
                                os.path.join(taskDir, 'deepin-extra'))
     cd.append_package_list(options.exclude_package,
                                os.path.join(taskDir, 'exclude'))
-    cd.add_boot_files('/work/loongson-boot', options.preseed)
 
-    # make a new installation disc image
     cd.make_disc()
     logger.info("programme finished")
