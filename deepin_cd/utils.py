@@ -2,7 +2,7 @@
 
 import glob
 
-PMONCFG="""
+PMON_CFG="""
 default 0
 timeout 3
 showmenu 1
@@ -19,7 +19,7 @@ title Install deepin Server V15 B{3} Via CDROM(3A2000)
 """
 
 # TODO: change the menu color
-KUNLUNCFG="""
+KUNLUN_CFG="""
 set default=0
 set timeout=3
 set menu_color_normal=white/black
@@ -45,7 +45,7 @@ def updateBootMenu(bootFolder, id, preseed):
 
     bootcfg = [os.path.join(bootFolder, cfg) for cfg in
                ['boot.cfg', 'grub.cfg']]
-    fileContents = [PMONCFG, KUNLUNCFG]
+    fileContents = [PMON_CFG, KUNLUN_CFG]
 
     for idx, cfg in enumerate(bootcfg):
         with open(cfg, 'w') as cfg:
@@ -56,4 +56,5 @@ def set_value(x, y, allow_empty = True):
     if result or allow_empty:
         return result
     else:
-        raise ValueError("both values are invalid")
+        raise ValueError("values are empty when allow_empty is false")
+
