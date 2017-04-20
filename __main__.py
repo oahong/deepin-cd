@@ -53,9 +53,10 @@ if __name__ == '__main__':
 
     if options.config:
         # options has been specified via json config
+        logger.info("load configuration from %s", options.config)
         with open(options.config, 'r') as f:
             configs = json.load(f)
-        pprint.pprint(configs)
+        logger.debug("dump configurations:\n %s", pprint.pformat(configs, 4))
     else:
         configs = {
             'arch': '', 'include': '', 'exclude': '',
