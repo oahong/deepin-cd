@@ -65,9 +65,10 @@ if __name__ == '__main__':
 
     arch = set_value(configs['arch'], options.arch, allow_empty=False)
     build_id = set_value(configs['task'], options.build_id, allow_empty=False)
-    name_version = set_value(configs['name'], 'deepin-15.1')
-    name = ''.join(name_version.split('-')[:-1])
-    version = name_version.split('-')[-1]
+
+    # fall back to deepin-server-15.1
+    name = set_value(configs['name'], 'deepin-server')
+    version = set_value(configs['tag'], '15.1')
 
     exclude = set_value(configs['exclude'], options.exclude)
     include = set_value(configs['include'], options.include)
