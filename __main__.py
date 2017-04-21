@@ -58,7 +58,9 @@ if __name__ == '__main__':
         logger.info("load configuration from %s", options.config)
         with open(options.config, 'r') as f:
             configs = json.load(f)
-        logger.debug("dump configurations:\n %s", pprint.pformat(configs, 4))
+        config_dir = os.path.realpath(os.path.dirname(options.config))
+        logger.debug("dump configurations in %s:\n %s".format(
+            config_dir, pprint.pformat(configs, 4)))
     else:
         configs = {
             'arch': '', 'include': '', 'exclude': '',
@@ -81,9 +83,9 @@ if __name__ == '__main__':
     cd.initialize_work()
 
     #cd.add_boot_files('/work/loongson-boot')
-    cd.append_package_list(include,
+    cd.append_package_list(os.path.join(config_dir, include),
                            os.path.join(task_dir, 'deepin-extra'))
-    cd.append_package_list(exclude,
+    cd.append_package_list(os.path.join(config_dir, exclude),
                            os.path.join(task_dir, 'exclude'))
 
     cd.make_disc()
