@@ -84,10 +84,14 @@ class DebianCD(object):
         write package list or copy package list file to a task file,
         this file is predefined in debian-cd
         """
+        logger.debug("package list: %s will append to %s", package_list, taskfile)
         if os.path.isfile(package_list):
             shutil.copy(package_list, taskfile)
-        with open(taskfile, 'w') as f:
-            f.write('\n'.join(package_list))
+            logger.debug("copy %s to %s", package_list, taskfile)
+        else:
+            logger.debug("append %s to %s", package_list, taskfile)
+            with open(taskfile, 'w') as f:
+                f.write('\n'.join(package_list))
 
     @staticmethod
     def add_late_command(script):
