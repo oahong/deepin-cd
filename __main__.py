@@ -24,8 +24,10 @@ if __name__ == '__main__':
                         help='Add additional packages to installation media')
     optgroup.add_argument('--exclude', '-e', nargs='*', default=[],
                         help='Exclude packages from installation media')
-    parser.add_argument('--workdir', '-w', default='/work/debian-cd',
-                        help='Project workdir, debian-cd resides in this place')
+    parser.add_argument('--work', '-w', default='/work/debian-cd',
+                        help='Project work dir, debian-cd resides in this place')
+    parser.add_argument('--output', '-o',
+                            help='Output dir in which the final artifacts live')
     cfggroup = parser.add_argument_group('Configuration file arguments')
     cfggroup.add_argument('--config', '-c', help="load configuration from a json file")
     parser.add_argument('--log-level', '-l', choices=['debug', 'info'],
@@ -46,8 +48,8 @@ if __name__ == '__main__':
     4. execute easy-build.sh, options can be specified by using environment variables
     5. Print the final build artifacts
     """
-    workDir = options.workdir
-    taskDir = os.path.join(options.workdir, 'tasks', DeepinCD.codename)
+    work = options.work
+    task_dir = os.path.join(options.work, 'tasks', DeepinCD.codename)
 
     configs = {}
 
@@ -73,15 +75,16 @@ if __name__ == '__main__':
     exclude = set_value(configs['exclude'], options.exclude)
     include = set_value(configs['include'], options.include)
     preseed = set_value(configs['preseed'], options.preseed)
+    output  = set_value(configs['output'], options.output)
 
-    cd = DeepinCD(arch, version, build_id, workDir)
-    cd.initialize_workdir()
+    cd = DeepinCD(arch, version, build_id, work, output)
+    cd.initialize_work()
 
     #cd.add_boot_files('/work/loongson-boot')
     cd.append_package_list(include,
-                           os.path.join(taskDir, 'deepin-extra'))
+                           os.path.join(task_dir, 'deepin-extra'))
     cd.append_package_list(exclude,
-                           os.path.join(taskDir, 'exclude'))
+                           os.path.join(task_dir, 'exclude'))
 
     cd.make_disc()
     logger.info("programme finished")
