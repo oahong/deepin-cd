@@ -70,6 +70,7 @@ class DebianCD(object):
         Run cmd with env, check return code then print stdout
         """
         logger.debug('runcmd %s with env %s', cmd, env)
+        #TODO: use cwd parameter
         cp = run(cmd, stdout=PIPE, env=env)
         print(cp.stdout.decode())
         if not cp.returncode:
