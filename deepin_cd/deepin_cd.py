@@ -7,7 +7,7 @@ import shutil
 
 from datetime import date
 try:
-    from subprocess import DEVNULL, PIPE, run
+    from subprocess import PIPE, run, CalledProcessError
 except:
     raise Exception("Require python version >= 3.5")
 
@@ -71,10 +71,12 @@ class DebianCD(object):
         """
         logger.debug('runcmd %s with env %s', cmd, env)
         #TODO: use cwd parameter
-        cp = run(cmd, stdout=PIPE, env=env)
-        print(cp.stdout.decode())
-        if not cp.returncode:
-            raise subprocess.CalledProcessError('Failed to run', cmd)
+        try:
+            cp = run(cmd, stdout=PIPE, stderr=PIPE, check=True, env=env)
+            output = cp.stdout.decode()
+        except CalledProcessError as e:
+            output = e.stdout.decode()
+        print(output)
 
     @staticmethod
     def append_package_list(package_list, taskfile):
