@@ -1,0 +1,14 @@
+{
+    "name":"loongson-server",
+    "tag":"4.4",
+    "arch":"mips64el",
+    "task":30,
+    "preseed":"preseed.cfg",
+    "include":"include",
+    "exclude":"exclude",
+    "output":"/work/mkiso",
+    "workbase":"/work/task/30",
+    "cache":"/work/cache",
+    "repo":"/work/mips64el",
+    "debian_cd":"/work/data/debian-cd"
+}
