@@ -37,7 +37,7 @@ class DebianCD(object):
             os.path.dirname(self.work), 'mirrors', self.arch)
 
         self.target_cd = '{}-{}-{}-B{}-DVD-1.iso'.format(
-            self.name, version, arch, build_id)
+            self.name, self.version, self.arch, self.build_id)
         logger.info('Target media is {} lives in {}'.format(self.target_cd, self.output))
 
     def get_output_dir(self):
