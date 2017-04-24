@@ -42,7 +42,6 @@ def updateBootMenu(bootFolder, id, preseed):
     vmlinux = glob.glob(os.path.join(bootDir, "vmlinux*"))
     vmlinux = [os.path.basename(v) for v in vmlinux]
 
-
     bootcfg = [os.path.join(bootFolder, cfg) for cfg in
                ['boot.cfg', 'grub.cfg']]
     fileContents = [PMON_CFG, KUNLUN_CFG]
