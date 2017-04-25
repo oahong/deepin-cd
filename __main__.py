@@ -50,9 +50,6 @@ def main(options):
     logger = logging.getLogger(__name__)
     logger.info('program started version: %s' % __VERSION__)
 
-    work = opts.work
-    task_dir = os.path.join(opts.work, 'tasks', DeepinCD.codename)
-
     if opts.config:
         # opts has been specified via json config
         logger.info("load configuration from %s", opts.config)
@@ -64,7 +61,8 @@ def main(options):
     else:
         configs = {
             'arch': '', 'include': '', 'exclude': '',
-            'name': '', 'preseed': '', 'task': ''
+            'name': '', 'preseed': '', 'task': '',
+            'workbase': '', 'output': '', 'repo': '',
         }
 
     arch = set_value(configs['arch'], opts.arch, allow_empty=False)
@@ -78,11 +76,13 @@ def main(options):
     include = set_value(configs['include'], opts.include)
     preseed = set_value(configs['preseed'], opts.preseed)
     output  = set_value(configs['output'], opts.output)
+    work = set_value(configs['workbase'], opts.work)
 
     cd = DeepinCD(arch, version, build_id, work, output)
     cd.initialize_work()
 
     #cd.add_boot_files('/work/loongson-boot')
+    task_dir = os.path.join(opts.work, 'tasks', DeepinCD.codename)
     cd.append_package_list(os.path.join(config_dir, include),
                            os.path.join(task_dir, 'deepin-extra'))
     cd.append_package_list(os.path.join(config_dir, exclude),
