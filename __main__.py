@@ -22,11 +22,11 @@ def parse_opts():
                           help='Add additional packages to installation media')
     optgroup.add_argument('--exclude', '-e', nargs='*', default=[],
                           help='Exclude packages from installation media')
-    parser.add_argument('--repo', '-r',
+    optgroup.add_argument('--repo', '-r',
                         help='Specify the local location of package repository')
-    parser.add_argument('--work', '-w', default='/work/debian-cd',
+    optgroup.add_argument('--work', '-w', default='/work/debian-cd',
                         help='Project work dir, debian-cd resides in this place')
-    parser.add_argument('--output', '-o',
+    optgroup.add_argument('--output', '-o',
                         help='Output dir in which the final artifacts live')
     optgroup.add_argument('--preseed', '-s', default='deepin.preseed',
                           help='use the preseed in installation media')
