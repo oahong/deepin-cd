@@ -23,7 +23,9 @@ class DebianCD(object):
     debian_cd_url = 'http://git.sh.sndu.cn/hhao/debian-cd'
     id_file = 'CURRENT_BUILD_ID'
 
-    def __init__(self, arch, version, build_id, work, output, project='deepin'):
+    def __init__(
+            self, arch, version, build_id, work,
+            output, repo, project='deepin'):
         """
         project is a custom cd identifier or project name
         """
@@ -33,15 +35,15 @@ class DebianCD(object):
         self.project = project
         self.work = work
         self.output = output
-        self.mirror = os.path.join(
-            os.path.dirname(self.work), 'mirrors', self.arch)
-
+        self.mirror = repo
         self.target_cd = '{}-{}-{}-B{}-DVD-1.iso'.format(
             self.project, self.version, self.arch, self.build_id)
-        logger.info('Target media is {} lives in {}'.format(self.target_cd, self.output))
+        logger.info('Target media is {} lives in {}'.format(
+            self.target_cd, self.output))
 
     def get_output_dir(self):
-        return os.path.join(self.output, self.version, str(date.today()))
+        return os.path.join(
+            self.output, self.version, str(date.today()))
 
     def get_build_id(self):
         return self.build_id

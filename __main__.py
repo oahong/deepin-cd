@@ -15,26 +15,27 @@ def parse_opts():
     parser = argparse.ArgumentParser(
         description='A custom installation media generator for deepin server.')
     optgroup = parser.add_argument_group('Build option arguments')
-    optgroup.add_argument('--preseed', '-s', default='deepin.preseed',
-                        help='use the preseed in installation media')
     optgroup.add_argument('--arch', '-a', default='mips64el',
-                        choices=__ARCHS__, help='Specify target architecture, mips64el is default')
+                          choices=__ARCHS__, help='Specify target architecture, mips64el is default')
     optgroup.add_argument('--build-id', '-b', type=int, help='Set build ID')
     optgroup.add_argument('--include', '-i', nargs='*', default=[],
-                        help='Add additional packages to installation media')
+                          help='Add additional packages to installation media')
     optgroup.add_argument('--exclude', '-e', nargs='*', default=[],
-                        help='Exclude packages from installation media')
+                          help='Exclude packages from installation media')
+    parser.add_argument('--repo', '-r',
+                        help='Specify the local location of package repository')
     parser.add_argument('--work', '-w', default='/work/debian-cd',
                         help='Project work dir, debian-cd resides in this place')
     parser.add_argument('--output', '-o',
-                            help='Output dir in which the final artifacts live')
+                        help='Output dir in which the final artifacts live')
+    optgroup.add_argument('--preseed', '-s', default='deepin.preseed',
+                          help='use the preseed in installation media')
     cfggroup = parser.add_argument_group('Configuration file arguments')
     cfggroup.add_argument('--config', '-c', help="load configuration from a json file")
     parser.add_argument('--log-level', '-l', choices=['debug', 'info'],
                         default='info', help='Set logging level')
     parser.add_argument('--version', '-v', action='version',
                         version='%(prog)s ' + __VERSION__)
-
     return parser.parse_args()
 
 def main(options):
@@ -53,8 +54,8 @@ def main(options):
     if opts.config:
         # opts has been specified via json config
         logger.info("load configuration from %s", opts.config)
-        with open(opts.config, 'r') as f:            configs = json.load(f)
-
+        with open(opts.config, 'r') as f:
+            configs = json.load(f)
         config_dir = os.path.realpath(os.path.dirname(opts.config))
         logger.debug("dump configurations in {}:\n {}".format(
             config_dir, pprint.pformat(configs, 4)))
@@ -65,8 +66,10 @@ def main(options):
             'workbase': '', 'output': '', 'repo': '',
         }
 
-    arch = set_value(configs['arch'], opts.arch, allow_empty=False)
-    build_id = set_value(configs['task'], opts.build_id, allow_empty=False)
+    arch = set_value(
+        configs['arch'], opts.arch, allow_empty=False)
+    build_id = set_value(
+        configs['task'], opts.build_id, allow_empty=False)
 
     # fall back to deepin-server-15.1
     project = set_value(configs['name'], 'deepin-server')
@@ -77,8 +80,11 @@ def main(options):
     preseed = set_value(configs['preseed'], opts.preseed)
     output  = set_value(configs['output'], opts.output)
     work = set_value(configs['workbase'], opts.work)
+    repo = set_value(
+        configs['repo'], opts.repo, allow_empty=False)
 
-    cd = DeepinCD(arch, version, build_id, work, output, project)
+    cd = DeepinCD(arch, version, build_id,
+                  work, output, repo, project)
     cd.initialize_work()
 
     #cd.add_boot_files('/work/loongson-boot')
