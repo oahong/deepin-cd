@@ -88,7 +88,7 @@ def main(options):
     cd.initialize_work()
 
     #cd.add_boot_files('/work/loongson-boot')
-    task_dir = os.path.join(opts.work, 'tasks', DeepinCD.codename)
+    task_dir = os.path.join(work, 'tasks', DeepinCD.codename)
     cd.append_package_list(os.path.join(config_dir, include),
                            os.path.join(task_dir, 'deepin-extra'))
     cd.append_package_list(os.path.join(config_dir, exclude),
