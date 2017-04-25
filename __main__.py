@@ -69,7 +69,7 @@ def main(options):
     build_id = set_value(configs['task'], opts.build_id, allow_empty=False)
 
     # fall back to deepin-server-15.1
-    name = set_value(configs['name'], 'deepin-server')
+    project = set_value(configs['name'], 'deepin-server')
     version = set_value(configs['tag'], '15.1')
 
     exclude = set_value(configs['exclude'], opts.exclude)
@@ -78,7 +78,7 @@ def main(options):
     output  = set_value(configs['output'], opts.output)
     work = set_value(configs['workbase'], opts.work)
 
-    cd = DeepinCD(arch, version, build_id, work, output)
+    cd = DeepinCD(arch, version, build_id, work, output, project)
     cd.initialize_work()
 
     #cd.add_boot_files('/work/loongson-boot')
