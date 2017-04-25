@@ -4,6 +4,7 @@ import os
 import re
 import logging
 import shutil
+import shlex
 
 from datetime import date
 try:
@@ -64,7 +65,7 @@ class DebianCD(object):
         if not os.listdir(self.work):
             logger.info('fetching debian-cd source code into {}'.format(
                 self.work))
-            self.runcmd(['git', 'clone', DebianCD.debian_cd_url, self.work])
+            self.runcmd('git clone', DebianCD.debian_cd_url, self.work)
 
     @staticmethod
     def runcmd(cmd, env={}):
@@ -74,7 +75,7 @@ class DebianCD(object):
         logger.debug('runcmd %s with env %s', cmd, env)
         #TODO: use cwd parameter
         try:
-            cp = run(cmd, stdout=PIPE, stderr=PIPE, check=True, env=env)
+            cp = run(shlex.split(cmd), stdout=PIPE, stderr=PIPE, check=True, env=env)
             output = cp.stdout.decode()
         except CalledProcessError as e:
             output = e.stdout.decode()
@@ -113,7 +114,7 @@ class DebianCD(object):
         A debian-cd wrapper.
         """
         logger.info("Start to build ISO image")
-        self.runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch])
+        self.runcmd('bash easy-build.sh -d light BC', self.arch])
         self.get_artifact()
 
 
@@ -137,7 +138,7 @@ class DeepinCD(DebianCD):
         """
         logger.info("Start to build ISO image for %s", self.arch)
         os.chdir(os.path.join(self.work))
-        self.runcmd(['bash', 'deepin-build.sh', 'DVD', self.arch],
+        self.runcmd('bash deepin-build.sh DVD', self.arch],
                     env={'PROJECT': self.project,
                          'CDVERSION': self.version,
                          'WORK': self.work,
