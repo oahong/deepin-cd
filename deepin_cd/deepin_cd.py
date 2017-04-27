@@ -114,8 +114,6 @@ class DebianCD(object):
         """
         logger.info("Start to build ISO image")
         self.runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch])
-        self.get_artifact()
-
 
 class LiveBootCD(object):
     """
@@ -148,6 +146,6 @@ class DeepinCD(DebianCD):
         )
 
 if __name__ == '__main__':
-    cd = DeepinCD('mips64el', '2014.3', 23, '/tmp')
+    cd = DeepinCD('mips64el', '2014.3', '/work/debian-cd', '/work/output', '/work/mirrors/mips64el', 23)
     cd.make_disc()
     cd.get_artifact()
