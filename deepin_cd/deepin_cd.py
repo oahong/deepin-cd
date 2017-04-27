@@ -130,10 +130,10 @@ class DeepinCD(DebianCD):
         """
         To finish the make_disc operation, debian-cd should:
         - follow debian upstream as much as possible, don't make unnessisary modifications to scripts
-        - besides the task dir, read tasks from an alternative directory
-        - copy boot specific files (or ISO skeleton) from a central place, different projects shares the same ISO skeleton
-        - copy customizations from each project directory
-        - write artifacts to output dir, which is set via configuration or command line parameter
+        - copy boot specific files (or ISO skeleton) from a central place, different projects share
+          same copy of ISO skeleton
+        - project specific modification, besides exta debian-cd tasks, comes from project configuratoin
+        - write artifacts to output dir, which is set via configuration
         """
         logger.info("Start to build ISO image for %s", self.arch)
         os.chdir(os.path.join(self.work))
