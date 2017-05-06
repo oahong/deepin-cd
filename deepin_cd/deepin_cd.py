@@ -56,7 +56,7 @@ class DebianCD(object):
         if os.path.exists(artifact):
             return artifact
         else:
-            raise IOError('{} not found'.format(artifact))
+            raise FileNotFoundError('{} not found'.format(artifact))
 
     def initialize_work(self):
         os.makedirs(self.work, exist_ok=True)
