@@ -61,8 +61,8 @@ def main(options):
             config_dir, pprint.pformat(configs, 4)))
     else:
         configs = {
-            'arch': '', 'include': '', 'exclude': '',
-            'name': '', 'preseed': '', 'task': '',
+            'include': '', 'exclude': '', 'preseed': '',
+            'arch': '', 'name': '', 'tag':'',  'task': '',
             'workbase': '', 'output': '', 'repo': '',
         }
 
