@@ -6,13 +6,10 @@ import logging
 import shutil
 
 from datetime import date
-try:
-    from subprocess import PIPE, run, CalledProcessError
-except:
-    raise Exception("Require python version >= 3.5")
+from subprocess import PIPE, STDOUT
+from subprocess import Popen
 
 logger = logging.getLogger(__name__)
-
 
 class DebianCD(object):
     """
@@ -33,9 +30,11 @@ class DebianCD(object):
         self.version = str(version)
         self.build_id = str(build_id)
         self.project = project
+
         self.work = work
         self.output = output
         self.mirror = repo
+
         self.target_cd = '{}-{}-{}-B{}-DVD-1.iso'.format(
             self.project, self.version, self.arch, self.build_id)
         logger.info('Target media is {} lives in {}'.format(
@@ -71,14 +70,12 @@ class DebianCD(object):
         """
         Run cmd with env, check return code then print stdout
         """
-        logger.debug('runcmd %s with env %s', cmd, env)
+        logger.debug('runcmd {} with env {}'.format(cmd, env))
         #TODO: use cwd parameter
-        try:
-            cp = run(cmd, stdout=PIPE, stderr=PIPE, check=True, env=env)
-            output = cp.stdout.decode()
-        except CalledProcessError as e:
-            output = e.stdout.decode()
-        print(output)
+        with Popen(cmd, stdout=PIPE, stderr=STDOUT,
+                   universal_newlines=True, env=env) as proc:
+            for line in proc.stdout:
+                print(line)
 
     @staticmethod
     def append_package_list(package_list, taskfile):
