@@ -144,6 +144,7 @@ class DeepinCD(DebianCD):
         )
 
 if __name__ == '__main__':
-    cd = DeepinCD('mips64el', '2014.3', '/work/debian-cd', '/work/output', '/work/mirrors/mips64el', 23)
+    cd = DeepinCD('mips64el', 23, '2014.3',
+                  '/work/debian-cd', '/work/output', '/work/mirrors/mips64el')
     cd.make_disc()
     cd.get_artifact()
