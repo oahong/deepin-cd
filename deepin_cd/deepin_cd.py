@@ -1,7 +1,6 @@
 #! /usr/bin/evn python
 
 import os
-import re
 import logging
 import shutil
 
@@ -131,7 +130,6 @@ class DeepinCD(DebianCD):
         - write artifacts to output dir, which is set via configuration
         """
         logger.info("Start to build ISO image for %s", self.arch)
-        os.chdir(os.path.join(self.work))
         self.runcmd(['bash', 'deepin-build.sh', 'DVD', self.arch],
                     env={'PROJECT': self.project,
                          'CDVERSION': self.version,
