@@ -63,17 +63,17 @@ class DebianCD(object):
         if not os.listdir(self.work):
             logger.info('fetching debian-cd source code into {}'.format(
                 self.work))
-            self.runcmd(['git', 'clone', DebianCD.debian_cd_url, self.work])
+            self.runcmd(['git', 'clone', DebianCD.debian_cd_url, self.work], cwd=self.work)
 
     @staticmethod
-    def runcmd(cmd, env={}):
+    def runcmd(cmd, env={}, cwd=None):
         """
         Run cmd with env, check return code then print stdout
         """
-        logger.debug('runcmd {} with env {}'.format(cmd, env))
+        logger.debug('runcmd {} with env {}, working dir {}'.format(cmd, env, cwd))
         #TODO: use cwd parameter
         with Popen(cmd, stdout=PIPE, stderr=STDOUT,
-                   universal_newlines=True, env=env) as proc:
+                   universal_newlines=True, env=env, cwd=cwd) as proc:
             for line in proc.stdout:
                 print(line)
 
@@ -110,7 +110,7 @@ class DebianCD(object):
         A debian-cd wrapper.
         """
         logger.info("Start to build ISO image")
-        self.runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch])
+        self.runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch], cwd=self.work)
 
 class LiveBootCD(object):
     """
@@ -139,7 +139,8 @@ class DeepinCD(DebianCD):
                          'OUTPUT': self.output,
                          'BUILD_ID': self.build_id,
                          'DEEPIN_MIRROR': self.mirror
-                    }
+                    },
+                    cwd=self.work
         )
 
 if __name__ == '__main__':
