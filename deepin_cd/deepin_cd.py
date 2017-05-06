@@ -75,7 +75,7 @@ class DebianCD(object):
         with Popen(cmd, stdout=PIPE, stderr=STDOUT,
                    universal_newlines=True, env=env, cwd=cwd) as proc:
             for line in proc.stdout:
-                print(line)
+                print(line, end='')
 
     @staticmethod
     def append_package_list(package_list, taskfile):
