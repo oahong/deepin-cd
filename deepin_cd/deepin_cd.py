@@ -8,6 +8,10 @@ from datetime import date
 from subprocess import PIPE, STDOUT
 from subprocess import Popen
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class DebianCD(object):
     """
     Set environment and run easy-build.sh to build

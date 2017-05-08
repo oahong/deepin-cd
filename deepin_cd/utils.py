@@ -1,6 +1,9 @@
 #! /usr/bin/env python3
 
 import glob
+import logging
+
+logger = logging.getLogger(__name__)
 
 def update_boot_menu(bootFolder, id, preseed):
     """
@@ -48,13 +51,13 @@ def update_boot_menu(bootFolder, id, preseed):
 
     for idx, cfg in enumerate(bootcfg):
         with open(cfg, 'w') as menu:
-            logging.debug("Update boot menu {} with entry: {}".format(cfg, vmlinux[0]))
+            logger.debug("Update boot menu {} with entry: {}".format(cfg, vmlinux[0]))
             menu.write(contents[idx].format(vmlinux[0], 'initrd.gz', id, preseed))
 
 def set_value(x, y, allow_empty = True):
     result = x or y
     if result or allow_empty:
-        logging.debug("Set value to", result)
+        logger.debug("Set value to", result)
         return result
     else:
         raise ValueError("value is empty when allow_empty is {}".format(allow_empty))
