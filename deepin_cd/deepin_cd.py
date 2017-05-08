@@ -1,15 +1,12 @@
 #! /usr/bin/evn python
 
 import os
-import logging
 import shutil
 
 from utils import runcmd
 from datetime import date
 from subprocess import PIPE, STDOUT
 from subprocess import Popen
-
-logger = logging.getLogger(__name__)
 
 class DebianCD(object):
     """
