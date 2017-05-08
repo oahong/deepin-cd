@@ -3,6 +3,9 @@
 import glob
 import logging
 
+from subprocess import PIPE, STDOUT
+from subprocess import Popen
+
 logger = logging.getLogger(__name__)
 
 def update_boot_menu(bootFolder, id, preseed):

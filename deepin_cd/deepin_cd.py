@@ -3,10 +3,8 @@
 import os
 import shutil
 
-from utils import runcmd
+from deepin_cd.utils import runcmd
 from datetime import date
-from subprocess import PIPE, STDOUT
-from subprocess import Popen
 
 import logging
 
