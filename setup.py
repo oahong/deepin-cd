@@ -14,7 +14,7 @@ setup(
     license = "GPL-2",
     keywords = "deepin CD customization",
     url = "https://github.com/oahong/deepin-cd",
-    packages=['deepin-cd'],
+    packages=['deepin_cd'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
