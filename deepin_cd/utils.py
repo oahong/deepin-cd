@@ -55,5 +55,15 @@ def set_value(x, y, allow_empty = True):
     if result or allow_empty:
         return result
     else:
-        raise ValueError("values are empty when allow_empty is false")
+        raise ValueError("value is empty when allow_empty is false")
 
+def runcmd(cmd, env={}, cwd=None):
+    """
+    Run cmd with env, check return code then print stdout
+    """
+    logger.debug('runcmd {} with env {}, working dir {}'.format(cmd, env, cwd))
+    #TODO: use cwd parameter
+    with Popen(cmd, stdout=PIPE, stderr=STDOUT,
+               universal_newlines=True, env=env, cwd=cwd) as proc:
+        for line in proc.stdout:
+            print(line, end='')

@@ -4,6 +4,7 @@ import os
 import logging
 import shutil
 
+from utils import runcmd
 from datetime import date
 from subprocess import PIPE, STDOUT
 from subprocess import Popen
@@ -62,19 +63,8 @@ class DebianCD(object):
         if not os.listdir(self.work):
             logger.info('fetching debian-cd source code into {}'.format(
                 self.work))
-            self.runcmd(['git', 'clone', DebianCD.debian_cd_url, self.work], cwd=self.work)
+            runcmd(['git', 'clone', DebianCD.debian_cd_url, self.work], cwd=self.work)
 
-    @staticmethod
-    def runcmd(cmd, env={}, cwd=None):
-        """
-        Run cmd with env, check return code then print stdout
-        """
-        logger.debug('runcmd {} with env {}, working dir {}'.format(cmd, env, cwd))
-        #TODO: use cwd parameter
-        with Popen(cmd, stdout=PIPE, stderr=STDOUT,
-                   universal_newlines=True, env=env, cwd=cwd) as proc:
-            for line in proc.stdout:
-                print(line, end='')
 
     @staticmethod
     def append_package_list(package_list, taskfile):
@@ -109,7 +99,7 @@ class DebianCD(object):
         A debian-cd wrapper.
         """
         logger.info("Start to build ISO image")
-        self.runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch], cwd=self.work)
+        runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch], cwd=self.work)
 
 class LiveBootCD(object):
     """
@@ -130,7 +120,7 @@ class DeepinCD(DebianCD):
         - write artifacts to output dir, which is set via configuration
         """
         logger.info("Start to build ISO image for %s", self.arch)
-        self.runcmd(['bash', 'deepin-build.sh', 'DVD', self.arch],
+        runcmd(['bash', 'deepin-build.sh', 'DVD', self.arch],
                     env={'PROJECT': self.project,
                          'CDVERSION': self.version,
                          'WORK': self.work,
