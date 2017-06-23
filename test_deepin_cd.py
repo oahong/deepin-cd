@@ -70,20 +70,19 @@ def main(options):
         configs['arch'], opts.arch, allow_empty=False)
     build_id = set_value(
         configs['task'], opts.build_id, allow_empty=False)
+    output  = set_value(
+        configs['output'], opts.output, allow_empty=False)
+    repo = set_value(
+        configs['repo'], opts.repo, allow_empty=False)
 
     # fall back to deepin-server-15.1
     project = set_value(configs['name'], 'deepin-server')
     version = set_value(configs['tag'], '15.1')
+    work = set_value(configs['workbase'], opts.work)
 
     exclude = set_value(configs['exclude'], opts.exclude)
     include = set_value(configs['include'], opts.include)
     preseed = set_value(configs['preseed'], opts.preseed)
-    output  = set_value(
-        configs['output'], opts.output, allow_empty=False)
-    work = set_value(
-        configs['workbase'], opts.work, allow_empty=False)
-    repo = set_value(
-        configs['repo'], opts.repo, allow_empty=False)
 
     cd = DeepinCD(arch, version, build_id,
                   work, output, repo, project)
