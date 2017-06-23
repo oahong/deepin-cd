@@ -63,6 +63,9 @@ class DebianCD(object):
             logger.info('fetching debian-cd source code into {}'.format(
                 self.work))
             runcmd(['git', 'clone', DebianCD.debian_cd_url, self.work], cwd=self.work)
+        else:
+            logger.info('update debian-cd source code')
+            runcmd(['git', 'pull'], cwd=self.work)
 
     def make_disc(self):
         """
