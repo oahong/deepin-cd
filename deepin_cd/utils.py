@@ -1,4 +1,3 @@
-
 #! /usr/bin/env python3
 
 import glob
@@ -61,7 +60,7 @@ def update_boot_menu(bootFolder, id, preseed):
 def set_value(x, y, allow_empty = True):
     result = x or y
     if result or allow_empty:
-        logger.debug("Set value to", result)
+        logger.debug("Set value to %s" % result)
         return result
     else:
         raise ValueError("value is empty when allow_empty is {}".format(allow_empty))
