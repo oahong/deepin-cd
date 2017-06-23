@@ -15,6 +15,7 @@ setup(
     keywords = "deepin CD customization",
     url = "https://github.com/oahong/deepin-cd",
     packages=['deepin_cd'],
+    scripts=['test_deepin_cd.py'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
