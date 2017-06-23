@@ -51,7 +51,7 @@ def main(options):
     logger = logging.getLogger(__name__)
     logger.info('program started version: %s' % __VERSION__)
 
-    if opts.config:
+    if opts.config is not None:
         # opts has been specified via json config
         logger.info("load configuration from %s", opts.config)
         with open(opts.config, 'r') as f:
@@ -89,10 +89,12 @@ def main(options):
 
     #cd.add_boot_files('/work/loongson-boot')
     task_dir = os.path.join(work, 'tasks', DeepinCD.codename)
-    cd.append_package_list(os.path.join(config_dir, include),
-                           os.path.join(task_dir, 'deepin-extra'))
-    cd.append_package_list(os.path.join(config_dir, exclude),
-                           os.path.join(task_dir, 'exclude'))
+
+    if opts.config is not None:
+        cd.append_package_list(os.path.join(config_dir, include),
+                               os.path.join(task_dir, 'deepin-extra'))
+        cd.append_package_list(os.path.join(config_dir, exclude),
+                               os.path.join(task_dir, 'exclude'))
 
     cd.make_disc()
     logger.info("programme finished")
