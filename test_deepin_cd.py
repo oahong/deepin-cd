@@ -78,8 +78,10 @@ def main(options):
     exclude = set_value(configs['exclude'], opts.exclude)
     include = set_value(configs['include'], opts.include)
     preseed = set_value(configs['preseed'], opts.preseed)
-    output  = set_value(configs['output'], opts.output)
-    work = set_value(configs['workbase'], opts.work)
+    output  = set_value(
+        configs['output'], opts.output, allow_empty=False)
+    work = set_value(
+        configs['workbase'], opts.work, allow_empty=False)
     repo = set_value(
         configs['repo'], opts.repo, allow_empty=False)
 
