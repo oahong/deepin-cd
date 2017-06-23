@@ -1,3 +1,4 @@
+
 #! /usr/bin/env python3
 
 import glob
@@ -67,7 +68,7 @@ def set_value(x, y, allow_empty = True):
 
 def runcmd(cmd, env={}, cwd=None):
     """
-    Run cmd with env, check return code then print stdout
+    Run cmd with env, check return code and print output to stdout
     """
     logger.debug('runcmd {} with env {}, working dir {}'.format(cmd, env, cwd))
     #TODO: use cwd parameter
