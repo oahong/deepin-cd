@@ -59,7 +59,7 @@ class DebianCD(object):
         if value > 0:
             self._build_id = value
 
-    def get_output_dir(self):
+    def __get_output_dir(self):
         return os.path.join(
             self.output, self.version, str(date.today()))
 
@@ -67,7 +67,7 @@ class DebianCD(object):
         """
         validate the final image
         """
-        artifact = os.path.join(self.get_output_dir(),
+        artifact = os.path.join(self.__get_output_dir(),
                                 self.target_cd)
         if os.path.exists(artifact):
             return artifact
