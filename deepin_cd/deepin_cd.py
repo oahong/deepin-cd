@@ -25,9 +25,9 @@ class DebianCD(object):
         """
         project is a custom cd identifier or project name
         """
-        self.arch = arch
+        self._arch = arch
         self.version = str(version)
-        self.build_id = str(build_id)
+        self._build_id = str(build_id)
         self.project = project
 
         self.work = work
@@ -35,16 +35,33 @@ class DebianCD(object):
         self.mirror = repo
 
         self.target_cd = '{}-{}-{}-B{}-DVD-1.iso'.format(
-            self.project, self.version, self.arch, self.build_id)
+            self.project, self.version, self._arch, self._build_id)
         logger.info('Target media is {} lives in {}'.format(
             self.target_cd, self.output))
+
+    @property
+    def arch(self):
+        return self._arch
+
+    @arch.setter
+    def arch(self, value):
+        if value in __ARCHS__:
+            self._arch = value
+        else:
+            raise ValueError('{} is not a supported architecture'.format(value))
+
+    @property
+    def build_id(self):
+        return self._build_id
+
+    @build_id.setter
+    def build_id(self, value):
+        if value > 0:
+            self._build_id = value
 
     def get_output_dir(self):
         return os.path.join(
             self.output, self.version, str(date.today()))
-
-    def get_build_id(self):
-        return self.build_id
 
     def get_artifact(self):
         """
@@ -72,7 +89,7 @@ class DebianCD(object):
         A debian-cd wrapper.
         """
         logger.info("Start to build ISO image")
-        runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch], cwd=self.work)
+        runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self._arch], cwd=self.work)
 
 
 class LiveBootCD(object):
@@ -121,13 +138,13 @@ class DeepinCD(DebianCD):
         - project specific modification, besides exta debian-cd tasks, comes from project configuratoin
         - write artifacts to output dir, which is set via configuration
         """
-        logger.info("Start to build ISO image for %s", self.arch)
-        runcmd(['bash', 'deepin-build.sh', 'DVD', self.arch],
+        logger.info("Start to build ISO image for %s", self._arch)
+        runcmd(['bash', 'deepin-build.sh', 'DVD', self._arch],
                     env={'PROJECT': self.project,
                          'CDVERSION': self.version,
                          'WORK': self.work,
                          'OUTPUT': self.output,
-                         'BUILD_ID': self.build_id,
+                         'BUILD_ID': self._build_id,
                          'DEEPIN_MIRROR': self.mirror
                     },
                     cwd=self.work
