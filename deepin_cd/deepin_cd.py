@@ -3,6 +3,7 @@
 import os
 import shutil
 
+from deepin_cd.config import __ARCHS__
 from deepin_cd.utils import runcmd
 from datetime import date
 
