@@ -23,9 +23,9 @@ class DebianCD(object):
         """
         project is a custom cd identifier or project name
         """
-        self._arch = arch
+        self.arch = arch
         self.version = str(version)
-        self._build_id = str(build_id)
+        self.build_id = str(build_id)
         self.project = project
 
         self.work = work
@@ -33,7 +33,7 @@ class DebianCD(object):
         self.mirror = repo
 
         self.target_cd = '{}-{}-{}-B{}-DVD-1.iso'.format(
-            self.project, self.version, self._arch, self._build_id)
+            self.project, self.version, self.arch, self.build_id)
         logger.info('Target media is {} lives in {}'.format(
             self.target_cd, self.output))
 
@@ -87,7 +87,7 @@ class DebianCD(object):
         A debian-cd wrapper.
         """
         logger.info("Start to build ISO image")
-        runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self._arch], cwd=self.work)
+        runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch], cwd=self.work)
 
 
 class LiveBootCD(object):
@@ -136,13 +136,13 @@ class DeepinCD(DebianCD):
         - project specific modification, besides exta debian-cd tasks, comes from project configuratoin
         - write artifacts to output dir, which is set via configuration
         """
-        logger.info("Start to build ISO image for %s", self._arch)
-        runcmd(['bash', 'deepin-build.sh', 'DVD', self._arch],
+        logger.info("Start to build ISO image for %s", self.arch)
+        runcmd(['bash', 'deepin-build.sh', 'DVD', self.arch],
                     env={'PROJECT': self.project,
                          'CDVERSION': self.version,
                          'WORK': self.work,
                          'OUTPUT': self.output,
-                         'BUILD_ID': self._build_id,
+                         'BUILD_ID': self.build_id,
                          'DEEPIN_MIRROR': self.mirror
                     },
                     cwd=self.work
