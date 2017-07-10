@@ -17,7 +17,6 @@ class DebianCD(object):
     """
     codename = 'kui'
     debian_cd_url = 'http://git.sh.sndu.cn/hhao/debian-cd'
-    id_file = 'CURRENT_BUILD_ID'
 
     def __init__(
             self, arch, version, build_id, work,
