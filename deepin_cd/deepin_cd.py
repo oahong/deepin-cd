@@ -24,8 +24,8 @@ class DebianCD(object):
         project is a custom cd identifier or project name
         """
         self.arch = arch
-        self.version = str(version)
-        self.build_id = str(build_id)
+        self.version = version
+        self.build_id = build_id
         self.project = project
 
         self.work = work
@@ -142,7 +142,7 @@ class DeepinCD(DebianCD):
                          'CDVERSION': self.version,
                          'WORK': self.work,
                          'OUTPUT': self.output,
-                         'BUILD_ID': self.build_id,
+                         'BUILD_ID': str(self.build_id),
                          'DEEPIN_MIRROR': self.mirror
                     },
                     cwd=self.work
