@@ -48,7 +48,9 @@ class DebianCD(object):
         if value in __ARCHS__:
             self._arch = value
         else:
-            raise ValueError('{} is not a supported architecture'.format(value))
+            e = ValueError('{} is not a supported architecture'.format(value))
+            logger.exception(e)
+            raise(e)
 
     @property
     def build_id(self):
@@ -56,8 +58,11 @@ class DebianCD(object):
 
     @build_id.setter
     def build_id(self, value):
-        if value > 0:
-            self._build_id = value
+        try:
+            self._build_id = int(value)
+        except ValueError as e:
+            logger.exception(e)
+            raise(e)
 
     def __get_output_dir(self):
         return os.path.join(
