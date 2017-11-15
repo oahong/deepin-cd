@@ -97,14 +97,6 @@ class DebianCD(object):
         runcmd(['bash', 'easy-build.sh', '-d', 'light', 'BC', self.arch], cwd=self.work)
 
 
-class LiveBootCD(object):
-    """
-    Another class for live-boot based installation media,
-    which is used in sw64(alpha) platform right now
-    """
-    pass
-
-
 class DeepinCD(DebianCD):
     @staticmethod
     def append_package_list(package_list, taskfile):
