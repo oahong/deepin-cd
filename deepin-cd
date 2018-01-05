@@ -1,0 +1,12 @@
+#! /usr/bin/env python3
+
+import logging
+from deepin_cd.deepin_cd import DeepinCD
+
+logging.basicConfig(level=logging.DEBUG)
+
+if __name__ == '__main__':
+    cd = DeepinCD()
+    cd.build_image()
+    output = cd.get_artifact()
+    logging.info("The final installation media is {}".format(output))

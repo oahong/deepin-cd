@@ -1,0 +1,8 @@
+{
+    "work": "/work/mkiso/debian-cd",
+    "output": "/work/iso",
+    "repository": "/work/mirror",
+    "skeleton": "/work/mkiso/sw64-boot",
+    "project": "deepin-server",
+    "version": "15.1"
+}
