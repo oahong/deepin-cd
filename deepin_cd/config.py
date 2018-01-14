@@ -7,3 +7,5 @@ __version__ = '0.5.0'
 
 # supported architectures
 __architectures__ = ('mips64el', 'sw64')
+# deepin 15.x codename is kui
+__codenames__ = ('kui')
