@@ -1,0 +1,18 @@
+{
+    "fonts": [
+        "fonts-dejavu",
+        "fonts-arphic-uming",
+        "fonts-arphic-ukai",
+        "fonts-wqy-microhei",
+        "fonts-wqy-zenhei",
+        "fonts-noto",
+        "xfonts-100dpi",
+        "xfonts-75dpi",
+        "xfonts-base",
+        "xfonts-encodings",
+        "xfonts-scalable",
+        "xfonts-utils",
+        "fontconfig",
+        "fontconfig-config"
+    ]
+}

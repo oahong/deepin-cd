@@ -1,0 +1,14 @@
+{
+    "base": [
+        "busybox",
+        "eject",
+        "plymouth",
+        "sudo",
+        "vim",
+        "emacs",
+        "deepin-archive-keyring",
+        "firmware-linux-nonfree",
+        "linux-image-4.4.15-deepin-aere",
+        "deepin-megacli-bin"
+    ]
+}

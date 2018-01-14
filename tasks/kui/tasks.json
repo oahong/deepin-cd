@@ -1,0 +1,29 @@
+{
+    "tasks": [
+            "task-ssh-server",
+            "task-desktop",
+            "task-mate-desktop",
+            "task-base-tools",
+            "task-dev-environment",
+            "task-java-environment",
+            "task-qtdev-environment",
+            "task-kerneldev-environment",
+            "task-web-server",
+            "task-apache-server",
+            "task-nginx-server",
+            "task-dhcp-server",
+            "task-dns-server",
+            "task-mail-server",
+            "task-ntp-server",
+            "task-database-server",
+            "task-mysql-server",
+            "task-postgresql-server",
+            "task-file-server",
+            "task-ftp-server",
+            "task-nfs-server",
+            "task-samba-server",
+            "task-print-server",
+            "task-chinese-s",
+            "task-chinese-s-desktop"
+        ]
+}

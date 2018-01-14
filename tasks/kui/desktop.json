@@ -1,0 +1,43 @@
+{
+    "xorg": [
+        "xserver-xorg-input-all",
+        "xserver-xorg-video-all",
+        "xserver-xorg-video-modesetting",
+        "xserver-xorg-video-siliconmotion",
+        "xterm"
+    ],
+    "mate": [
+        "engrampa",
+        "atril",
+        "eom",
+        "mate-applets",
+        "mate-media",
+        "mate-screensaver",
+        "mate-system-monitor",
+        "mate-user-guide",
+        "pluma",
+        "mate-power-manager",
+        "mate-utils",
+        "network-manager-gnome",
+        "firefox"
+    ],
+    "ChineseSupport": [
+        "fcitx",
+        "fcitx-pinyin",
+        "fcitx-sunpinyin",
+        "fcitx-table-wubi",
+        "fcitx-frontend-all",
+        "fcitx-frontend-gtk2",
+        "fcitx-frontend-gtk3",
+        "fcitx-frontend-qt4",
+        "fcitx-frontend-qt5",
+        "fcitx-config-gtk",
+        "fcitx-config-gtk2",
+        "fcitx-ui-classic",
+        "fcitx-ui-light",
+        "im-config"
+    ],
+    "DeepinBase": [
+        "deepin-base-files"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "groups": [
+        "base",
+        "desktop",
+        "development",
+        "enhancement",
+        "fonts",
+        "tasks"
+    ]
+}

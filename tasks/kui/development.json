@@ -1,0 +1,20 @@
+{
+    "dev": [
+        "build-essential",
+        "automake",
+        "autoconf",
+        "valgrind",
+        "gdb",
+        "qt4-qmake",
+        "qt5-qmake",
+        "qt4-default",
+        "qt5-default",
+        "cmake",
+        "qtcreator",
+        "libncurses5-dev",
+        "linux-headers-4.4.15-deepin-aere",
+        "bison",
+        "libssl-dev",
+        "yacc"
+    ]
+}
