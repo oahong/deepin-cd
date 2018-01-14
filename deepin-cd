@@ -3,9 +3,13 @@
 import logging
 from deepin_cd.deepin_cd import DeepinCD
 
+
+if sys.version_info[:2] < (3, 5):
+    raise SystemExit("Python version is less than 3.5")
+
 logging.basicConfig(level=logging.DEBUG)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cd = DeepinCD()
     cd.build_image()
     output = cd.get_artifact()
