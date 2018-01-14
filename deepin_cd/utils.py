@@ -63,7 +63,7 @@ def set_value(x, y, allow_empty = True):
         logger.debug("Set value to %s" % result)
         return result
     else:
-        raise ValueError("value is empty when allow_empty is {}".format(allow_empty))
+        raise ValueError("value is empty")
 
 def runcmd(cmd, env={}, cwd=None):
     """
