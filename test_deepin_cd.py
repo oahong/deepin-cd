@@ -38,7 +38,7 @@ def parse_opts():
                         version='%(prog)s ' + __VERSION__)
     return parser.parse_args()
 
-def main(options):
+def main(opts):
     """
     Make a deepin cd in 5 steps:
     1. Add arch (mips64el/sw64) specific boot files (hard-coded in debian-cd at the time of writing)
@@ -51,7 +51,20 @@ def main(options):
     logger = logging.getLogger(__name__)
     logger.info('program started version: %s' % __VERSION__)
 
-    if opts.config is not None:
+    configs = {
+        'include': '',
+        'exclude': '',
+        'preseed': '',
+        'arch': '',
+        'name': '',
+        'tag':'',
+        'task': '',
+        'workbase': '',
+        'output': '',
+        'repo': '',
+    }
+
+    if opts.config:
         # opts has been specified via json config
         logger.info("load configuration from %s", opts.config)
         with open(opts.config, 'r') as f:
@@ -59,12 +72,6 @@ def main(options):
         config_dir = os.path.realpath(os.path.dirname(opts.config))
         logger.debug("dump configurations in {}:\n {}".format(
             config_dir, pprint.pformat(configs, 4)))
-    else:
-        configs = {
-            'include': '', 'exclude': '', 'preseed': '',
-            'arch': '', 'name': '', 'tag':'',  'task': '',
-            'workbase': '', 'output': '', 'repo': '',
-        }
 
     arch = set_value(
         configs['arch'], opts.arch, allow_empty=False)
@@ -91,7 +98,7 @@ def main(options):
     #cd.add_boot_files('/work/loongson-boot')
     task_dir = os.path.join(work, 'tasks', DeepinCD.codename)
 
-    if opts.config is not None:
+    if opts.config:
         cd.append_package_list(os.path.join(config_dir, include),
                                os.path.join(task_dir, 'deepin-extra'))
         cd.append_package_list(os.path.join(config_dir, exclude),
