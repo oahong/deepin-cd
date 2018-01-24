@@ -1,4 +1,1 @@
 GitPython
-flask
-flask-restful
-python-apt
