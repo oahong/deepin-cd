@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+import sys
 import logging
 from deepin_cd.deepin_cd import DeepinCD
 
