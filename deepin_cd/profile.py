@@ -7,6 +7,7 @@ import os.path as osp
 
 from deepin_cd.config import __architectures__
 from deepin_cd.utils import log_and_raise_exception, get_native_arch
+from pprint import pprint
 
 logger = logging.getLogger(__name__)
 
@@ -71,10 +72,10 @@ class BuildProfile:
     def __check_version(self):
         version = self.profile['version']
         pattern = '^\d+\.\d+$'
-
         if not re.match(pattern, version):
             log_and_raise_exception(
-                ValueError("Version {} pattern is invalid").format(version))
+                ValueError("Version {} pattern is invalid".format(version)))
+
 
     def __check_target_arch(self):
         """

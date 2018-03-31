@@ -15,7 +15,7 @@ class DebianCDRepo:
 
     repository = "http://git.sh.deepin.cn/hhao/debian-cd"
 
-    def __init__(self, dir, branch=master):
+    def __init__(self, dir, branch="master"):
         self.dir = dir
         self.branch = branch
 

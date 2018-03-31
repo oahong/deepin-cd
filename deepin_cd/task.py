@@ -5,8 +5,8 @@ import logging
 import sysconfig
 
 from pathlib import Path
-from deepin.utils import log_and_raise_exception
-from deepin.config import __codenames__
+from deepin_cd.utils import log_and_raise_exception
+from deepin_cd.config import __codenames__
 
 logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ class Task(object):
 
     def __init__(self, codename):
         self.codename = codename
-        self.task_dir = self.codename
+        self.task_dir = codename
         self.packages = self.read_package_list()
 
     @property
@@ -41,7 +41,7 @@ class Task(object):
         return self.__task_dir
 
     @task_dir.setter
-    def task_dir(self):
+    def task_dir(self, __task_dir):
         path = Path(sysconfig.get_path('data')) / 'tasks' / self.codename
         if Path.is_dir(path):
             logging.debug('set task_dir to {}'.format(path))
@@ -67,7 +67,7 @@ class Task(object):
 
         logging.info('Read software groups from {}'.format(self.taskfile))
         groups = [c + '.json' for c in
-            self.read_task_file(self.taskfile())['groups']]
+            self.read_task_file(self.taskfile)['groups']]
         logging.debug("software groups in taskfile: {}".format(groups))
         logging.info('Read package list from group files {}'.format(groups))
 
