@@ -31,7 +31,7 @@ class DebianCDRepo:
             except git.exc. GitCommandError as e:
                 log_and_raise_exception(e)
         elif osp.isdir(self.dir):
-            repo = git.Repo.clone_from(
+            git.Repo.clone_from(
                 DebianCDRepo.repository,
                 self.dir,
                 branch=self.branch)

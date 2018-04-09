@@ -51,6 +51,7 @@ class DeepinCD():
         optgroup.add_argument('--skeleton', '-s', help='ISO skeleton dir')
         optgroup.add_argument('--work', '-w',
             help='Project work dir, debian-cd resides in this place')
+        optgroup.add_argument('--project', '-p', help='Set procject name')
 
         cfggroup = parser.add_argument_group('Configuration file arguments')
         cfggroup.add_argument('--config', '-c', help="load configuration file")

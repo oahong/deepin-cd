@@ -45,13 +45,15 @@ class BuildProfile:
         """
         # to make a build we must have those keys in the profile
         must_have_keys={
-            'version', 'output', 'repository', 'skeleton',  'work'
+            'version', 'output', 'repository',
+            'skeleton',  'work', 'project',
         }
         if must_have_keys.issubset(self.profile):
             self.__check_path_spec()
             self.__check_version()
             self.__check_target_arch()
             self.__check_build_id()
+            self.__check_project_name()
         else:
             e = AttributeError("Incomplete build profile {}, must have at least {}".format(
                 self.profile, must_have_keys))
@@ -65,17 +67,16 @@ class BuildProfile:
             try:
                 osp.isdir(path)
                 logger.debug("{} is a valid path spec".format(path))
-            except (TypeError, NotADirectoryError) as e:
+            except (TypeError, NotADirectoryError):
                 log_and_raise_exception(
                     ValueError("Invalid path spec {}".format(path)))
 
     def __check_version(self):
         version = self.profile['version']
-        pattern = '^\d+\.\d+$'
+        pattern = r'^\d+\.\d+$'
         if not re.match(pattern, version):
             log_and_raise_exception(
                 ValueError("Version {} pattern is invalid".format(version)))
-
 
     def __check_target_arch(self):
         """
@@ -98,10 +99,17 @@ class BuildProfile:
         else:
             logger.warning('No build id in the profile')
 
+    def __check_project_name(self):
+        project = self.profile['project']
+        pattern = r'^\w+-\w+$'
+        if not re.match(pattern, project):
+            log_and_raise_exception(
+                ValueError("Project {} is invalid".format(project)))
+
     def __repr__(self):
         return self.profile
 
-
+ 
 if __name__ == '__main__':
     import sysconfig
     buildprofile = BuildProfile(
