@@ -20,10 +20,7 @@ setup(
     install_requires=read('requirements.txt').strip().split('\n'),
     packages=find_packages(),
     scripts=['deepin-cd'],
-    data_files=[
-        ('config', ['config/config.json']),
-        'tasks'
-        ],
+    data_files=[('config', ['config/config.json'])],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
