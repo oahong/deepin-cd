@@ -13,7 +13,7 @@ logging.getLogger(__name__)
 class DebianCDRepo:
     """ Initialize a debian-cd code repository from repository"""
 
-    repository = "http://git.sh.deepin.cn/hhao/debian-cd"
+    repository = "https://github.com/oahong/debian-cd"
 
     def __init__(self, dir, branch="master"):
         self.dir = dir
