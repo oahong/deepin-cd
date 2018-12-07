@@ -101,7 +101,7 @@ class BuildProfile:
 
     def __check_project_name(self):
         project = self.profile['project']
-        pattern = r'^\w+-\w+$'
+        pattern = r'^\w+-\w+(-\w+)?$'
         if not re.match(pattern, project):
             log_and_raise_exception(
                 ValueError("Project {} is invalid".format(project)))
