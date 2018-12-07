@@ -85,7 +85,7 @@ class DeepinCD():
         # branch name pattern: arch-project (sw_64-10P)
         branch = "{}-{}".format(self.profile['arch'],
             self.profile['project'].lstrip('deepin-server'))
-        logger.info("Fetching debian-cd source code on branch {}" % branch)
+        logger.info("Fetching debian-cd source code on branch {}".format(branch))
 
         repo = DebianCDRepo(self.profile['work'], branch)
         repo.fetch_src()
